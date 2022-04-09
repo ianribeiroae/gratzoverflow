@@ -1,16 +1,7 @@
 import passport from "../../lib/passport-google-auth";
-import nextConnect from "next-connect";
-import cookieSession from "cookie-session";
+import authRouter from "../../middleware/auth";
 
-export default nextConnect()
-  .use(
-    cookieSession({
-      name: "session",
-      keys: ["token"],
-    })
-  )
-  .use(passport.initialize())
-  .use(passport.session())
+export default authRouter()
   .get(
     passport.authenticate("google", {
       scope: [
